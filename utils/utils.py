@@ -94,6 +94,16 @@ def get_data(dataset, lat, lon):
 
 
 def make_dataframe(data, time, csv_name, data_column_name, subdir_name):
+    """
+    制作DataFrame并写入csv
+
+    :param data: 数据
+    :param time: 时间数据
+    :param csv_name: 文件名称
+    :param data_column_name: 列名
+    :param subdir_name: 子文件夹名称
+    :return:
+    """
     processed_path = os.path.join('processed_data', subdir_name)
     try:
         df = pd.read_csv(os.path.join(processed_path, csv_name), index_col=0)
@@ -107,6 +117,15 @@ def make_dataframe(data, time, csv_name, data_column_name, subdir_name):
 
 
 def make_csv_file(dataset, lat, lon, subdir_name):
+    """
+    生成CSV文件
+
+    :param dataset: 数据集
+    :param lat: 纬度
+    :param lon: 经度
+    :param subdir_name: 子文件夹名称
+    :return:
+    """
     lat = lat[0].tolist()
     lon = lon[0].tolist()
 

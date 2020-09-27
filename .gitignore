@@ -2,3 +2,4 @@
 /processed_data/
 /raw_data/
 /venv/
+*.csv

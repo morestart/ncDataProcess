@@ -1,10 +1,16 @@
 import os
 import shutil
 from utils.utils import OperateFiles
+import yaml
 
 if __name__ == '__main__':
 
-    data_root_path = 'raw_data'
+    with open('config.yml', 'r') as f:
+        data = f.read()
+
+    content = yaml.load(data, Loader=yaml.FullLoader)
+
+    data_root_path = content['root_path']
 
     try:
         os.mkdir('processed')
@@ -12,5 +18,5 @@ if __name__ == '__main__':
         shutil.rmtree('processed')
         os.mkdir('processed')
 
-    o = OperateFiles((120.5, 121), (35.0, 35.5))
+    o = OperateFiles(content['lon'], content['lat'])
     o.read_data('raw_data')

@@ -1,9 +1,10 @@
 import os
+import sys
+
+import numpy as np
 import pandas as pd
 import xarray as xr
-import numpy as np
 from tqdm import tqdm
-import sys
 
 
 class NC:
@@ -154,11 +155,12 @@ class OperateFiles:
 
     def read_data(self, root_path):
         all_nc_file = self.get_nc_file(root_path)
+        keys = all_nc_file.keys()
 
         # 遍历文件夹
-        for i in tqdm(range(1, len(all_nc_file) + 1)):
+        for i in tqdm(keys):
             # 遍历文件夹内所有文件
-            for file in all_nc_file[f'{i}']:
+            for file in all_nc_file[i]:
                 # 读取nc数据
                 dataset = self._nc.load_nc_data(file)
                 # 获取一个区域内的所有可选经纬度

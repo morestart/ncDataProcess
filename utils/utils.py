@@ -1,9 +1,10 @@
 import os
+import shutil
 import sys
-
 import numpy as np
 import pandas as pd
 import xarray as xr
+import yaml
 from tqdm import tqdm
 
 
@@ -204,3 +205,21 @@ class OperateFiles:
             data_dict = {'time': data_time, column_name: data}
             df = pd.DataFrame(data_dict)
             df.to_csv(csv_saved_path)
+
+
+def nc_to_csv():
+    with open('config.yml', 'r') as f:
+        data = f.read()
+
+    content = yaml.load(data, Loader=yaml.FullLoader)
+
+    data_root_path = content['root_path']
+
+    try:
+        os.mkdir('processed')
+    except FileExistsError:
+        shutil.rmtree('processed')
+        os.mkdir('processed')
+
+    o = OperateFiles(content['lon'], content['lat'])
+    o.read_data(data_root_path)

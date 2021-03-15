@@ -1,3 +1,5 @@
+此仓库不再维护，请大家移步https://github.com/TYYKJ/NC
+
 # nc区域数据提取工具
 
 ## 依赖安装
